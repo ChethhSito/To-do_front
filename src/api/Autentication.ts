@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://to-do-back-f1l3.onrender.com';
 
 const AuthAPI = {
   login: `${BASE_URL}/auth/login`,
