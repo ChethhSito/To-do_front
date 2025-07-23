@@ -2,8 +2,9 @@
 import { useState } from "react";
 import { LoginUser } from "@/api/Autentication";
 import { useRouter } from "next/navigation";
+import { Usuario } from "../../../interfaces/usuario";
 export default function InciarSesion(){
-    const[usuario, setUsuario] = useState({
+    const[usuario, setUsuario] = useState<Usuario>({
         _id: "",
         nombre: "",
         email: "",
@@ -11,11 +12,10 @@ export default function InciarSesion(){
         fechaCreacion: new Date()
     });
     const router = useRouter();
-    const enviarInicio = async(dato:any)=>{
-        const { _id, nombre, ...usuarioSinIdNiNombre } = dato;
-        console.log("usuarioSinId", usuarioSinIdNiNombre);
+    const enviarInicio = async(dato:Usuario)=>{
+        
         try {
-            const response = await LoginUser(usuarioSinIdNiNombre);
+            const response = await LoginUser(dato);
             console.log("data",response);
             localStorage.setItem('userId', response.user.id);
             localStorage.setItem('token', response.token);

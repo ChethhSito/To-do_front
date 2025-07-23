@@ -2,10 +2,11 @@
 import { useState } from "react";
 import { RegistrarUser } from "@/api/Autentication";
 import { useRouter } from "next/navigation";
+import { Usuario } from "../../../interfaces/usuario";
 
 export default function Registrarte(){
     const router = useRouter();
-    const[usuario, setUsuario] = useState({
+    const[usuario, setUsuario] = useState<Usuario>({
         _id: "",
         nombre: "",
         email: "",
@@ -13,10 +14,9 @@ export default function Registrarte(){
         fechaCreacion: new Date()
     });
     
-    const enviarDato = async(dato:any)=>{
-        const {_id, ...usuarioSinId} = dato; // Eliminar _id si existe
+    const enviarDato = async(dato:Usuario)=>{
         try {
-            const response = await RegistrarUser(usuarioSinId);
+            const response = await RegistrarUser(dato);
             console.log(response);
             router.push('/incio_sesion'); // Redirigir a la página de inicio de sesión después del registro
         } catch (error) {

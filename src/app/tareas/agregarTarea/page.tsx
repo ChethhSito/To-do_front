@@ -34,9 +34,8 @@ export default function AgregarTarea({onTareaAgregada}:AgregarTareaProps) {
     }, []);
 
     const enviarTarea = async(tarea:Tarea)=>{
-        const { _id, ...tareaSinId } = tarea; // Eliminar _id si existe
         try{
-        const data = await CrearTarea(tareaSinId);
+        const data = await CrearTarea(tarea);
         setTareas(data);
         console.log("Tarea creada:", data);
         if(onTareaAgregada) {

@@ -1,5 +1,6 @@
 import axios from "axios";
 const BASE_URL = "https://to-do-back-f1l3.onrender.com";
+import { Tarea } from "../../interfaces/tarea";
 
 const ActionsTareas ={
     create: `${BASE_URL}/tareas/addTask`,
@@ -9,7 +10,7 @@ const ActionsTareas ={
     get: `${BASE_URL}/tareas/getTask`,
     complete: `${BASE_URL}/tareas/completeTask`
 };
-export const CrearTarea = async(tarea:any )=>{
+export const CrearTarea = async(tarea:Tarea )=>{
     try {
         const response = await axios.post(ActionsTareas.create, tarea);
         return response.data;
@@ -18,7 +19,7 @@ export const CrearTarea = async(tarea:any )=>{
         throw new Error('Error al crear tarea: ' + error);
     }
 }
-export const EditTarea = async(id:string, tarea:any)=>{
+export const EditTarea = async(id:string, tarea:Tarea)=>{
     try {
         const response = await axios.put(`${ActionsTareas.edit}/${id}`, tarea);
         return response.data;

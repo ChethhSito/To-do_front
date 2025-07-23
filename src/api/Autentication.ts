@@ -1,11 +1,12 @@
 import axios from 'axios';
 const BASE_URL = 'https://to-do-back-f1l3.onrender.com';
+import { Usuario } from '../../interfaces/usuario';
 
 const AuthAPI = {
   login: `${BASE_URL}/auth/login`,
   register: `${BASE_URL}/auth/register`,
 };
-export const RegistrarUser = async(usuario: any) =>{
+export const RegistrarUser = async(usuario: Usuario) =>{
     try{
         const response = await axios.post(AuthAPI.register, usuario);
         return response.data;
@@ -14,7 +15,7 @@ export const RegistrarUser = async(usuario: any) =>{
         throw new Error('Error al registrar usuario: ' + error);
     }
 }
-export const LoginUser = async(usuario:any)=>{
+export const LoginUser = async(usuario:Usuario)=>{
     try{
         const response = await axios.post(AuthAPI.login, usuario);
         return response.data;
