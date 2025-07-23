@@ -4,10 +4,11 @@ import { ListarTareas,MarcarTareaCompletada, EliminarTarea } from "@/api/CrudTar
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus,faPenToSquare,faTrash, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 import { Tarea } from "../../../interfaces/tarea";
-import AgregarTarea from "./agregarTarea/page";
+import AgregarTarea from "../../components/agregarTarea";
+import Image from "next/image";
 
 import ObtenerUnaTarea from "./obtenerTarea/page";
-import EditarTarea from "./editarTarea/page";
+import EditarTarea from "../../components/editarTarea";
 
 export default function TareasPagina(){
     const [userId, setUserId] = useState<string>("");
@@ -18,21 +19,24 @@ export default function TareasPagina(){
     const [isEditando, setIsEditando] = useState(false);
     
     useEffect(() => {
-        const storedUserId = localStorage.getItem("userId") || "";
-        if (!storedUserId) {
-            console.error("No user ID found in localStorage");
-            return;
-        }
-        setUserId(storedUserId);
+    const storedUserId = localStorage.getItem("userId") || "";
+    if (!storedUserId) {
+        console.error("No user ID found in localStorage");
+        return;
+    }
+    setUserId(storedUserId);
+}, []);
 
-        ListarTareas(userId)
-            .then(data => { 
-                setTareas(data) 
-                console.log("Data de tareas:", data);
-            }).catch(error => {
-                console.error("Error al listar tareas:", error);
-            });        
-    }, []);
+useEffect(() => {
+    if (!userId) return;
+    ListarTareas(userId)
+        .then(data => { 
+            setTareas(data) 
+            console.log("Data de tareas:", data);
+        }).catch(error => {
+            console.error("Error al listar tareas:", error);
+        });        
+}, [userId]);
     
    const marcarListos = async (id: string) => {
         try {
@@ -94,8 +98,14 @@ export default function TareasPagina(){
                 " onClick={() => setSidebarOpen(true) }>
                 Agregar <FontAwesomeIcon icon={faPlus}/>
                 </button>
-                {/* falta implementar el icon del usuario :v */}
-                <img className="mr-8 mt-4 h-12 rounded-3xl cursor-pointer" src="https://static.vecteezy.com/system/resources/previews/043/116/532/non_2x/man-silhouette-profile-picture-anime-style-free-vector.jpg" alt="no sale" />
+                <Image
+                    className="mr-8 mt-4 h-12 rounded-3xl cursor-pointer"
+                    src="https://static.vecteezy.com/system/resources/previews/043/116/532/non_2x/man-silhouette-profile-picture-anime-style-free-vector.jpg"
+                    alt="no sale"
+                    width={48}
+                    height={48}
+                />
+                <Image className="mr-8 mt-4 h-12 rounded-3xl cursor-pointer" src="https://static.vecteezy.com/system/resources/previews/043/116/532/non_2x/man-silhouette-profile-picture-anime-style-free-vector.jpg" alt="no sale" />
             </div>
                 { tareas.length === 0 ? (
                     <p className="text-center text-gray-400 mt-4">No hay tareas </p>

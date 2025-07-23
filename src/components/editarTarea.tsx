@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { Tarea } from "../../../../interfaces/tarea";
-import { CrearTarea } from "@/api/CrudTareas";
-
-interface AgregarTareaProps {
-    onTareaAgregada?: (tarea: Tarea) => void;
+import { Tarea } from "../../interfaces/tarea";
+import { EditTarea,obtenerTareaId } from "@/api/CrudTareas";
+interface EditarTareaProps {
+    onTareaEditada?: (tarea: Tarea) => void;
+    tareaId?: string;
 }
-export default function AgregarTarea({onTareaAgregada}:AgregarTareaProps) {
+export default function EditarTarea({tareaId, onTareaEditada}:EditarTareaProps) {
     const defaultFechaLimite = new Date();
     defaultFechaLimite.setDate(defaultFechaLimite.getDate() + 7);
     
@@ -21,25 +21,23 @@ export default function AgregarTarea({onTareaAgregada}:AgregarTareaProps) {
         usuarioId: "",
     });
     useEffect(() => {
-        const storedUserId = localStorage.getItem("userId") || "";
-        console.log("Stored User ID:", storedUserId);
-        if (!storedUserId) {
-            console.error("No user ID found in localStorage");
-            return;
-        }
-        setTareas(prevState => ({
-            ...prevState,
-            usuarioId: storedUserId
-        }));
-    }, []);
+        if(!tareaId)return;
+        const fetchTarea = async () => {
+            // console.log("Stored User ID:", storedUserId); // Remove or define storedUserId if needed
+            const response = await obtenerTareaId(tareaId || "");
+            setTareas(response);
+        };
+        fetchTarea();
+    }, [tareaId]);
 
-    const enviarTarea = async(tarea:Tarea)=>{
+    const editarTarea = async(tarea:Tarea)=>{
+        
         try{
-        const data = await CrearTarea(tarea);
+        const data = await EditTarea(tareaId || "",tarea);
         setTareas(data);
-        console.log("Tarea creada:", data);
-        if(onTareaAgregada) {
-            onTareaAgregada(data);
+        console.log("Tarea editada:", data);
+        if(onTareaEditada) {
+            onTareaEditada(data);
         }
         } catch(error){
             console.error("Error al enviar tarea:", error);
@@ -71,7 +69,7 @@ export default function AgregarTarea({onTareaAgregada}:AgregarTareaProps) {
                     duration-150
                     active:translate-y-2
                     active:shadow-[0_2px_0_0_#000]
-                " onClick={()=>enviarTarea(tareas)}>agregar</button>
+                " onClick={()=>editarTarea(tareas)}>agregar</button>
             </div>
         </div>
 
