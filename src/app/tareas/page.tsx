@@ -87,8 +87,8 @@ useEffect(() => {
 
            
             <main className="max-w-2/3 mx-auto p-4 font-mono bg-neutral-900 text-white rounded-lg mt-20">
-            <div className="flex justify-between mb-2">
-                <button className=" px-4 ml-4 mt-4 mb-2 bg-sky-700 rounded-2xl text-black font-bold cursor-pointer
+            
+                <button className=" px-4 py-2 ml-4 mt-4 mb-2 bg-sky-700 rounded-2xl text-black font-bold cursor-pointer
                     shadow-[0_8px_0_0_#000]
                     transition-all
                     duration-150
@@ -98,15 +98,7 @@ useEffect(() => {
                 " onClick={() => setSidebarOpen(true) }>
                 Agregar <FontAwesomeIcon icon={faPlus}/>
                 </button>
-                <Image
-                    className="mr-8 mt-4 h-12 rounded-3xl cursor-pointer"
-                    src="https://static.vecteezy.com/system/resources/previews/043/116/532/non_2x/man-silhouette-profile-picture-anime-style-free-vector.jpg"
-                    alt="no sale"
-                    width={48}
-                    height={48}
-                />
-                <Image className="mr-8 mt-4 h-12 rounded-3xl cursor-pointer" src="https://static.vecteezy.com/system/resources/previews/043/116/532/non_2x/man-silhouette-profile-picture-anime-style-free-vector.jpg" alt="no sale" />
-            </div>
+               
                 { tareas.length === 0 ? (
                     <p className="text-center text-gray-400 mt-4">No hay tareas </p>
                 ):(
