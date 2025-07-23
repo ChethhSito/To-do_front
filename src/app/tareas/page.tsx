@@ -1,11 +1,11 @@
 'use client'
-import { use, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { ListarTareas,MarcarTareaCompletada, EliminarTarea } from "@/api/CrudTareas";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus,faPenToSquare,faTrash, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 import { Tarea } from "../../../interfaces/tarea";
 import AgregarTarea from "./agregarTarea/page";
-import { useRouter } from "next/navigation";
+
 import ObtenerUnaTarea from "./obtenerTarea/page";
 import EditarTarea from "./editarTarea/page";
 
@@ -25,7 +25,7 @@ export default function TareasPagina(){
         }
         setUserId(storedUserId);
 
-        ListarTareas(storedUserId)
+        ListarTareas(userId)
             .then(data => { 
                 setTareas(data) 
                 console.log("Data de tareas:", data);

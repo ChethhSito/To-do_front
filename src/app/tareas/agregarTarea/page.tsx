@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Tarea } from "../../../../interfaces/tarea";
 import { CrearTarea } from "@/api/CrudTareas";
-import {  InputLabel, Select, MenuItem, Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
+
 interface AgregarTareaProps {
     onTareaAgregada?: (tarea: Tarea) => void;
 }

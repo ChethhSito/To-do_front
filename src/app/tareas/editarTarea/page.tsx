@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Tarea } from "../../../../interfaces/tarea";
 import { EditTarea,obtenerTareaId } from "@/api/CrudTareas";
-import {  InputLabel, Select, MenuItem, Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
 interface EditarTareaProps {
     onTareaEditada?: (tarea: Tarea) => void;
     tareaId?: string;

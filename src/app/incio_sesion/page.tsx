@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { LoginUser } from "@/api/Autentication";
 import { useRouter } from "next/navigation";
 export default function InciarSesion(){
