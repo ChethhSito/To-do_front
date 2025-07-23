@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { Tarea } from "../../../../interfaces/tarea";
+import { Tarea } from "../../interfaces/tarea";
 import { obtenerTareaId } from "@/api/CrudTareas";
 
 

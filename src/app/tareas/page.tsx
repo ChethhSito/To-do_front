@@ -7,7 +7,7 @@ import { Tarea } from "../../../interfaces/tarea";
 import AgregarTarea from "../../components/agregarTarea";
 import Image from "next/image";
 
-import ObtenerUnaTarea from "./obtenerTarea/page";
+import ObtenerUnaTarea from "../../components/obtenerTarea";
 import EditarTarea from "../../components/editarTarea";
 
 export default function TareasPagina(){
